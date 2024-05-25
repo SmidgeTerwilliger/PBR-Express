@@ -5,7 +5,6 @@
 
 
 
-
 import hou
 import os
 
@@ -18,18 +17,23 @@ supported_renderers = [
 "Octane",
 ]
 
-## List of all possible naming conventions
+## List of all possible naming conventions 
+
+## Everything after EMISSION is GSG naming convention and I've only implemented them in the Octane Version
+
 supportedTextures_data = {
     "DIFFUSE":      ['diffuse', 'Diffuse', 'diff', 'Diff', 'Albedo', 'albedo', 'color', 'Color', 'BaseColor', 'basecolor'],     
     "AO":           ['ambientOcclusion', 'AmbientOcclusion', 'AO', 'ao'],           
     "DISP":         ['disp', 'Displacement', 'Height', 'height'],        
-    "NORMAL":       ['Normal', 'normal', 'opengl', 'dx', 'NormalDX', 'normal-ogl', 'nor'],      
+    "NORMAL":       ['Normal', 'normal', 'opengl', 'dx', 'NormalDX', 'normal-ogl', 'nor', 'gl'],      
     "ROUGH":        ['roughness', 'Roughness', 'rough'],        
     "METALLIC":     ['Metallic', 'metallic', 'Metalness'],    
     "OPACITY":      ['opacity', 'alpha', 'Opacity'],     
     "EMISSION":     ['Emission', 'emission', 'emissive'],
     "SHEEN":        ['sheenopacity'],
     "SHEENCOLOR":    ['sheencolor'],
+    "COATOPACITY":   ['coatopacity'],
+    "COATROUGHNESS":   ['coatroughness'],
     "SCATTWEIGHT":   ['scatteringweight'],
     "SPECLEVEL":   ['specularlevel'],
     "SSSCALE":   ['scatteringdistancescale'],
@@ -547,6 +551,10 @@ def nodeCreation(renderer, goal, file_data):
                 octane_standard.setNamedInput("sheen", texture_image_rgb, "NT_TEX_IMAGE")
             if textureType == "SHEENCOLOR":
                 octane_standard.setNamedInput("sheenColor", texture_image_rgb, "NT_TEX_IMAGE")
+            if textureType == "COATOPACITY":
+                octane_standard.setNamedInput("coating", texture_image_rgb, "NT_TEX_IMAGE")
+            if textureType == "COATROUGHNESS":
+                octane_standard.setNamedInput("coatingRoughness", texture_image_rgb, "NT_TEX_IMAGE")
             if textureType == "SSSCALE":
                 octane_standard.setNamedInput("scale", texture_image_rgb, "NT_TEX_IMAGE")
             if textureType == "SSCOLOR":
